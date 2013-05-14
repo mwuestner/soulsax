@@ -215,10 +215,10 @@ $databases = array (
   array (
     'default' => 
     array (
-      'database' => 'soulsaxcomdb2',
-      'username' => 'soulsaxcom',
-      'password' => 'xwk6p@z',
-      'host' => 'mysqlsvr30.world4you.com',
+      'database' => 'db470011781',
+      'username' => 'dbo470011781',
+      'password' => 'jazzier007',
+      'host' => 'db470011781.db.1and1.com',
       'port' => '',
       'driver' => 'mysql',
       'prefix' => 'drupal_',

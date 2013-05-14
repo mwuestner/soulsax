@@ -1,0 +1,15 @@
+<?php
+
+function ajax_regions_example_init() {
+
+  // Pass regions to our JS
+  global $theme;
+  $regions = system_region_list($theme);
+  $regions = array_keys($regions);
+
+  drupal_add_js(array('ajaxRegionsExample' => array('regions' => $regions)), 'setting');
+
+  // Add the js to all pages
+  drupal_add_js(drupal_get_path("module", "ajax_regions_example") . "/js/ajax_regions_example.js");
+
+}

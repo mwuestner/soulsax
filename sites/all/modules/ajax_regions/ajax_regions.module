@@ -1,0 +1,51 @@
+<?php
+
+
+/**
+ * Register array of regions for loading
+ * @param $reg Array of registered regions - this will override the current one
+ * @return Currently registered regions
+ */
+function _regions_loader_register($reg = false) {
+  static $register = false;
+  if ($reg) {
+    $register = $reg;
+  }
+  return $register;
+}
+
+
+/**
+ * Implementation of hook_init()
+ */
+function ajax_regions_init() {
+
+  drupal_add_js(drupal_get_path("module", "ajax_regions") . "/js/ajax_regions.js");
+  drupal_add_library('system', 'drupal.ajax');
+
+  if (isset($_POST['regionsLoader'])) {
+    $rl = $_POST['regionsLoader'];
+    _regions_loader_register($rl);
+  }
+}
+
+
+/**
+ * Implementation of hook_page_alter()
+ */
+function ajax_regions_page_alter($page) {
+  $rl = _regions_loader_register();
+  if ($rl) {
+    $result = array();
+
+    $commands = array();
+    foreach ($rl as $req) {
+      $commands[] = ajax_command_html(
+        $req['selector'],
+        render($page[$req['region']])
+      );
+    }
+    print ajax_render($commands);
+    drupal_exit();
+  }
+}

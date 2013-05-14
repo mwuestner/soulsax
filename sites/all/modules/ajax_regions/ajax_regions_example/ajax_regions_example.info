@@ -1,0 +1,19 @@
+
+name = Ajax Regions loader example
+description = Just an example module that ajaxifies all the links
+version = VERSION
+core = 7.x
+package = Cache
+
+dependencies[] = ajax_regions
+
+files[] = ajax_regions_example.module
+
+
+
+; Information added by drupal.org packaging script on 2012-02-14
+version = "7.x-1.0-alpha2+4-dev"
+core = "7.x"
+project = "ajax_regions"
+datestamp = "1329220925"
+

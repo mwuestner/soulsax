@@ -1,3 +1,4 @@
+AddType x-mapp-php5 .php
 #
 # Apache/PHP/Drupal settings:
 #
@@ -54,7 +55,7 @@ DirectoryIndex index.php index.html index.htm
 
 # Various rewrite rules.
 <IfModule mod_rewrite.c>
-  RewriteEngine on
+  RewriteEngine ON
 
   # Block access to "hidden" directories whose names begin with a period. This
   # includes directories used by version control systems such as Subversion or
@@ -95,7 +96,7 @@ DirectoryIndex index.php index.html index.htm
   #
   # If your site is running in a VirtualDocumentRoot at http://example.com/,
   # uncomment the following line:
-  # RewriteBase /
+  RewriteBase /
 
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().

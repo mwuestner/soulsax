@@ -3990,3 +3990,4 @@ function node_file_download_access($field, $entity_type, $entity) {
     return node_access('view', $entity);
   }
 }
+

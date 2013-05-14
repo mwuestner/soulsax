@@ -43,13 +43,13 @@ class DefaultMailSystem implements MailSystemInterface {
     // If 'Return-Path' isn't already set in php.ini, we pass it separately
     // as an additional parameter instead of in the header.
     // However, if PHP's 'safe_mode' is on, this is not allowed.
-    /*if (isset($message['headers']['Return-Path']) && !ini_get('safe_mode')) {
+    if (isset($message['headers']['Return-Path']) && !ini_get('safe_mode')) {
       $return_path_set = strpos(ini_get('sendmail_path'), ' -f');
       if (!$return_path_set) {
         $message['Return-Path'] = $message['headers']['Return-Path'];
         unset($message['headers']['Return-Path']);
       }
-    }*/
+    }
     $mimeheaders = array();
     foreach ($message['headers'] as $name => $value) {
       $mimeheaders[] = $name . ': ' . mime_header_encode($value);
@@ -70,7 +70,7 @@ class DefaultMailSystem implements MailSystemInterface {
     // hosts. The return value of this method will still indicate whether mail
     // was sent successfully.
     if (!isset($_SERVER['WINDIR']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Win32') === FALSE) {
-      /*if (isset($message['Return-Path']) && !ini_get('safe_mode')) {
+      if (isset($message['Return-Path']) && !ini_get('safe_mode')) {
         // On most non-Windows systems, the "-f" option to the sendmail command
         // is used to set the Return-Path. There is no space between -f and
         // the value of the return path.
@@ -82,7 +82,7 @@ class DefaultMailSystem implements MailSystemInterface {
           '-f' . $message['Return-Path']
         );
       }
-      else */{
+      else {
         // The optional $additional_parameters argument to mail() is not
         // allowed if safe_mode is enabled. Passing any value throws a PHP
         // warning and makes mail() return FALSE.

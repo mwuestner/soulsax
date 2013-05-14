@@ -80,7 +80,7 @@ class DatabaseSchema_mysql extends DatabaseSchema {
 
     // Provide defaults if needed.
     $table += array(
-      'mysql_engine' => 'MyISAM',
+      'mysql_engine' => 'InnoDB',
       'mysql_character_set' => 'utf8',
     );
 

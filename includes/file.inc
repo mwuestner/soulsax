@@ -20,7 +20,7 @@ require_once DRUPAL_ROOT . '/includes/stream_wrappers.inc';
  * Common file handling functions.
  *
  * Fields on the file object:
- * - fid: File ID	
+ * - fid: File ID
  * - uid: The {users}.uid of the user who is associated with the file.
  * - filename: Name of the file with no path components. This may differ from
  *   the basename of the filepath if the file is renamed to avoid overwriting
@@ -89,7 +89,7 @@ define('FILE_STATUS_PERMANENT', 1);
  * wrappers that are appropriate for particular usage. For example, this returns
  * only stream wrappers that use local file storage:
  * @code
- *   $local_stream_wrappers = file_get_stream_wrappers(STEAM_WRAPPERS_LOCAL);
+ *   $local_stream_wrappers = file_get_stream_wrappers(STREAM_WRAPPERS_LOCAL);
  * @endcode
  *
  * The $filter parameter can only filter to types containing a particular flag.
@@ -99,7 +99,7 @@ define('FILE_STATUS_PERMANENT', 1);
  * array_diff_key() function can be used to help with this. For example, this
  * returns only stream wrappers that do not use local file storage:
  * @code
- *   $remote_stream_wrappers = array_diff_key(file_get_stream_wrappers(STREAM_WRAPPERS_ALL), file_get_stream_wrappers(STEAM_WRAPPERS_LOCAL));
+ *   $remote_stream_wrappers = array_diff_key(file_get_stream_wrappers(STREAM_WRAPPERS_ALL), file_get_stream_wrappers(STREAM_WRAPPERS_LOCAL));
  * @endcode
  *
  * @param $filter
@@ -281,10 +281,6 @@ function file_stream_wrapper_uri_normalize($uri) {
     if ($target !== FALSE) {
       $uri = $scheme . '://' . $target;
     }
-  }
-  else {
-    // The default scheme is file://
-    $url = 'file://' . $uri;
   }
   return $uri;
 }
@@ -491,11 +487,11 @@ function file_create_htaccess($directory, $private = TRUE) {
 
   if ($private) {
     // Private .htaccess file.
-    $htaccess_lines = "SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006\nDeny from all\n#Options None\n#Options +FollowSymLinks";
+    $htaccess_lines = "SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006\nDeny from all\nOptions None\nOptions +FollowSymLinks";
   }
   else {
     // Public .htaccess file.
-    $htaccess_lines = "SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006\n#Options None\n#Options +FollowSymLinks";
+    $htaccess_lines = "SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006\nOptions None\nOptions +FollowSymLinks";
   }
 
   // Write the .htaccess file.
@@ -834,9 +830,8 @@ function file_valid_uri($uri) {
  *   A string specifying the filepath or URI of the source file.
  * @param $destination
  *   A URI containing the destination that $source should be copied to. The
- *   URI may be a bare filepath (without a scheme) and in that case the default
- *   scheme (file://) will be used. If this value is omitted, Drupal's default
- *   files scheme will be used, usually "public://".
+ *   URI may be a bare filepath (without a scheme). If this value is omitted,
+ *   Drupal's default files scheme will be used, usually "public://".
  * @param $replace
  *   Replace behavior when the destination file already exists:
  *   - FILE_EXISTS_REPLACE - Replace the existing file.
@@ -892,7 +887,7 @@ function file_unmanaged_copy($source, $destination = NULL, $replace = FILE_EXIST
   $destination = file_destination($destination, $replace);
   if ($destination === FALSE) {
     drupal_set_message(t('The file %file could not be copied because a file by that name already exists in the destination directory.', array('%file' => $original_source)), 'error');
-    watchdog('file', 'File %file could not be copied because a file by that name already exists in the destination directory (%directory)', array('%file' => $original_source, '%destination' => $destination));
+    watchdog('file', 'File %file could not be copied because a file by that name already exists in the destination directory (%directory)', array('%file' => $original_source, '%directory' => $destination));
     return FALSE;
   }
 
@@ -1543,13 +1538,12 @@ function file_save_upload($source, $validators = array(), $destination = FALSE, 
   // Move uploaded files from PHP's upload_tmp_dir to Drupal's temporary
   // directory. This overcomes open_basedir restrictions for future file
   // operations.
-  $file->uri = drupal_realpath($file->destination);
+  $file->uri = $file->destination;
   if (!drupal_move_uploaded_file($_FILES['files']['tmp_name'][$source], $file->uri)) {
     form_set_error($source, t('File upload error. Could not move uploaded file.'));
     watchdog('file', 'Upload error. Could not move uploaded file %file to destination %destination.', array('%file' => $file->filename, '%destination' => $file->uri));
     return FALSE;
   }
-  $file->uri = $file->destination;
 
   // Set the permissions on the new file.
   drupal_chmod($file->uri);
@@ -2482,20 +2476,10 @@ function file_directory_temp() {
 function file_get_content_headers($file) {
   $name = mime_header_encode($file->filename);
   $type = mime_header_encode($file->filemime);
-  // Serve images, text, and flash content for display rather than download.
-  $inline_types = variable_get('file_inline_types', array('^text/', '^image/', 'flash$'));
-  $disposition = 'attachment';
-  foreach ($inline_types as $inline_type) {
-    // Exclamation marks are used as delimiters to avoid escaping slashes.
-    if (preg_match('!' . $inline_type . '!', $file->filemime)) {
-      $disposition = 'inline';
-    }
-  }
 
   return array(
     'Content-Type' => $type,
     'Content-Length' => $file->filesize,
-    'Content-Disposition' => $disposition . '; filename="' . $name . '"',
     'Cache-Control' => 'private',
   );
 }

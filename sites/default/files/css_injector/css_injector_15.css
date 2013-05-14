@@ -1,0 +1,15 @@
+.orbit {top:4px}
+.da-slide .view-content { background: url(sites/all/modules/jail/trans_px.gif) center center no-repeat; height: 640px; }
+.da-slide .view-content img { display: none; }
+
+.view-content.orbit { background: none; }
+.view-content.orbit img { display: block; }
+ /*css für das verstecken von menüelementen ohne hover */
+.orbit-wrapper {
+  .slider-nav span { @include opacity(0); @include single-transition(opacity, 400ms); }
+  &:hover .slider-nav span { @include opacity(1); }
+}
+
+/* CSS */
+.orbit-wrapper .slider-nav span { filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); opacity: 0; -webkit-transition: opacity 400ms; -moz-transition: opacity 400ms; -o-transition: opacity 400ms; transition: opacity 400ms; }
+.orbit-wrapper:hover .slider-nav span { filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100); opacity: 1; }

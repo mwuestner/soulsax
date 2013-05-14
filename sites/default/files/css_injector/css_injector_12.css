@@ -1,0 +1,8 @@
+#videoblock{
+width:100%; 
+#videoblock{height:640px;}
+}
+@media only screen and (max-width:320px) {#videoblock{height:240px;}}
+@media only screen and (min-width:480px) {#videoblock{height:320px;}}
+@media only screen and (min-width: 640px) {#videoblock{height:480px;}}
+@media only screen and (min-width: 940px) {#videoblock{height:640px;}}

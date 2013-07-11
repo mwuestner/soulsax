@@ -75,7 +75,7 @@ function drupal_theme_initialize() {
     return;
   }
 
-  drupal_bootstrap(DRUPAL_BOOTSTRAP_DATABASE);
+  drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
   $themes = list_themes();
 
   // Only select the user selected theme if it is available in the

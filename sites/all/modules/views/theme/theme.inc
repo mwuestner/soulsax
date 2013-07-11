@@ -851,7 +851,7 @@ function template_preprocess_views_view_list(&$vars) {
   }
 
   if ($vars['class']) {
-    $vars['list_type_prefix'] = '<' . $handler->options['type'] . ' class="' . $vars['class'] . '">';
+    $vars['list_type_prefix'] = '<' . $handler->options['type'] . ' data-clearing class="' . $vars['class'] . '">';
   }
   template_preprocess_views_view_unformatted($vars);
 }

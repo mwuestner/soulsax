@@ -148,7 +148,7 @@
 <div class="bottom-bar">
   <div class="row">
     <div class="twelve columns">
-      &copy; <?php print date('Y') . ' by soulsax ' . check_plain($site_name);?> | <a href="http://www.soulsax.com/drupal/content/impressum">imprint</a>
+      &copy; <?php print date('Y') . ' by soulsax ' . check_plain($site_name);?> | <a href="http://www.soulsax.eu/drupal/content/impressum">imprint</a>
     </div>
   </div>
 </div>

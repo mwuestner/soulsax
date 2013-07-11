@@ -1,8 +1,8 @@
 /* font-face */
 @font-face {
   font-family: "GeneralEnclosedFoundicons";
-  src: url("http://www.soulsax.com/drupal/sites/all/themes/soulsax_zurb/fonts/general_enclosed_foundicons.eot");
-  src: url("http://www.soulsax.com/drupal/sites/all/themes/soulsax_zurb/fonts/general_enclosed_foundicons.eot?#iefix") format("embedded-opentype"), url("http://www.soulsax.com/drupal/sites/all/themes/soulsax_zurb/fonts/general_enclosed_foundicons.woff") format("woff"), url("http://www.soulsax.com/drupal/sites/all/themes/soulsax_zurb/fonts/general_enclosed_foundicons.ttf") format("truetype"), url("http://www.soulsax.com/drupal/sites/all/themes/soulsax_zurb/fonts/general_enclosed_foundicons.svg#GeneralEnclosedFoundicons") format("svg");
+  src: url("http://www.soulsax.eu/drupal/sites/all/themes/soulsax_zurb/fonts/general_enclosed_foundicons.eot");
+  src: url("http://www.soulsax.eu/drupal/sites/all/themes/soulsax_zurb/fonts/general_enclosed_foundicons.eot?#iefix") format("embedded-opentype"), url("http://www.soulsax.eu/drupal/sites/all/themes/soulsax_zurb/fonts/general_enclosed_foundicons.woff") format("woff"), url("http://www.soulsax.eu/drupal/sites/all/themes/soulsax_zurb/fonts/general_enclosed_foundicons.ttf") format("truetype"), url("http://www.soulsax.eu/drupal/sites/all/themes/soulsax_zurb/fonts/general_enclosed_foundicons.svg#GeneralEnclosedFoundicons") format("svg");
   font-weight: normal;
   font-style: normal;
 }

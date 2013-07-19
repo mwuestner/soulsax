@@ -41,8 +41,8 @@
  $(window).load(function() {
         $.stratus({
           align : 'bottom', /* Whether the player appears at the top of bottom of the page. Acceptable values: top or bottom */
-          animate : 'slide', /* How and if the player should animate when it opens. Acceptable values: slide, fade, or false. */
-          auto_play : false, /* Whether the player should start playing automatically. */
+          animate : 'false', /* How and if the player should animate when it opens. Acceptable values: slide, fade, or false. */
+          auto_play : true, /* Whether the player should start playing automatically. */
           buying : true, /* Whether the buy button should appear on the player. */
           color : 'a7782b', /* The color of the controls and waveform. Acceptable value: hex or name (from SVG color codes) */
           download : true, /* Whether the download button should appear on the player. */
@@ -53,6 +53,6 @@
           user : true, /* Whether or not the track artist name is shown on player. */
           stats : true, /* Whether or not the stats for comments, favorites, and plays appear on the player. */
           theme : '', /* Pass a css url to theme the player. For example http://stratus.sc/themes/dark.css */
-          volume : 100  /* The default volume level. Acceptable value: 0 - 100 */
+          volume : 80 /* The default volume level. Acceptable value: 0 - 100 */
         });
       });
